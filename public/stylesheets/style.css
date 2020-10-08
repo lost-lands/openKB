@@ -55,11 +55,19 @@ html{
 }
 
 .brand-image{
-    padding: 12px 10px 0 30px;    
+    padding: 10px 0 !important;  
 }
-
+.brand-image img {
+    max-height: 30px;
+    width: auto;
+    display: inline-block;
+}
+.header .navbar-default {
+    background-color: transparent;
+    border: none;
+}
 .navbar-brand{
-    padding-left: 30px;
+    padding: 0 30px;
 }
 
 .view_count{
@@ -138,10 +146,6 @@ html{
 
 .tokenfield .token .close{
     color: black;
-}
-
-.search_bar{
-    margin-top: 10px;
 }
 
 .dropup-button{
@@ -240,4 +244,24 @@ html{
     background: white;
     cursor: inherit;
     display: block;
+}
+.header {
+    padding-bottom: 64px;
+    background-image: url("../header.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(2px);
+    margin-bottom: 32px;
+}
+.header .header-title {
+    color: #fff;
+    position: relative;
+}
+.header .header-blur {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }

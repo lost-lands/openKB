@@ -92,8 +92,10 @@
   </head>
   <body class="{{show_footer}}">
     <!-- Static navbar -->
+    <div class="header">
+      <div class="header-blur"></div>
       <nav class="navbar navbar-default navbar-static-top">
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">{{__ "Toggle navigation"}}</span>
@@ -102,7 +104,10 @@
             <span class="icon-bar"></span>
           </button>
             {{#ifCond config.settings.show_website_logo '===' true}}
-              <a class="navbar-brand brand-image" href="{{app_context}}/"><img src="{{app_context}}/static/logo.png" width="140"></a>
+            <div class="navbar-brand">
+                  <a class="navbar-brand brand-image" href="{{app_context}}/"><img src="{{app_context}}/static/logo.png"></a>
+            </div>
+              
             {{else}}
                 {{#ifCond config.settings.website_title '===' 'openKB'}}
                   <a class="navbar-brand brand-image" href="{{app_context}}/"><img src="{{app_context}}/static/logo.png" width="140"></a>
@@ -113,6 +118,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://lostlands.co/" target="_blank">Main Website</a></li>
+             <li><a href="https://status.lostlands.co/" target="_blank">Server Status</a></li>
             {{#if session.user}}
               {{#if result._id}}
                 <li><a href="{{app_context}}/edit/{{result._id}}">{{__ "Edit"}}</a></li>
@@ -159,6 +166,31 @@
         </div>
         </div>
       </nav>
+      <div class="container">
+        <div class="header-title text-center">
+          <h1>How can we help?</h1>
+        </div>
+        <form action="{{app_context}}/search" id="search_form" method="post">
+              {{#if config.settings.show_featured_articles}}
+              <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 search_bar">
+              {{else}}
+                  <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 search_bar">
+              {{/if}}
+            <div class="input-group">
+              <input type="text" name="frm_search" id="frm_search" autocomplete="off" class="form-control input-lg" placeholder="{{__ "Search the knowledge base"}}">
+              <span class="input-group-btn">
+                <button class="btn btn-success btn-lg" id="btn_search" type="submit"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+                  {{#ifCond config.settings.typeahead_search '===' true}}
+                  <div id="searchResult" class="hidden col-lg-12">
+                      <ul class="list-group searchResultList"></ul>
+                  </div>
+                  {{/ifCond}}
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="container-fluid">
       {{{body}}}
     </div>

@@ -156,7 +156,7 @@ router.get('/' + config.settings.route_name + '/:id/version', common.restrict, (
         // show the view
         common.dbQuery(db.kb, { kb_published: 'true', kb_versioned_doc: { $eq: true } }, sortBy, featuredCount, (err, featured_results) => {
             res.render('kb', {
-                title: result.kb_title,
+                title: result.kb_title+" | Lost Lands Support",
                 result: result,
                 user_page: true,
                 kb_body: common.sanitizeHTML(markdownit.render(result.kb_body)),
@@ -249,7 +249,7 @@ router.get('/' + config.settings.route_name + '/:id', common.restrict, (req, res
                 // show the view
                 common.dbQuery(db.kb, { kb_published: 'true' }, sortBy, featuredCount, (err, featured_results) => {
                     res.render('kb', {
-                        title: result.kb_title,
+                        title: result.kb_title+" | Lost Lands Support",
                         result: result,
                         user_page: true,
                         kb_body: common.sanitizeHTML(markdownit.render(result.kb_body)),
@@ -282,7 +282,7 @@ router.get('/settings', common.restrict, (req, res) => {
 
     fs.readdir(themePath, (err, files) => {
         res.render('settings', {
-            title: 'Settings',
+            title: 'Settings | Lost Lands Support',
             session: req.session,
             themes: files.filter(junk.not),
             locale: Object.keys(req.i18n.locales),
@@ -392,7 +392,7 @@ router.get('/edit/:id', common.restrict, (req, res) => {
 
         common.dbQuery(db.kb, { kb_parent_id: req.params.id }, { kb_last_updated: -1 }, 20, (err, versions) => {
             res.render('edit', {
-                title: 'Edit article',
+                title: 'Edit article | Lost Lands Support',
                 result: result,
                 versions: versions,
                 session: req.session,
@@ -501,7 +501,7 @@ router.get('/suggest', common.suggest_allowed, (req, res) => {
     common.setTemplateDir('admin', req);
 
     res.render('suggest', {
-        title: 'Suggest article',
+        title: 'Suggest article | Lost Lands Support',
         config: config,
         editor: true,
         is_admin: req.session.is_admin,
@@ -726,7 +726,7 @@ router.get('/users', common.restrict, (req, res) => {
     const db = req.app.db;
     common.dbQuery(db.users, {}, null, null, (err, users) => {
         res.render('users', {
-            title: 'Users',
+            title: 'Users | Lost Lands Support',
             users: users,
             config: config,
             is_admin: req.session.is_admin,
@@ -752,7 +752,7 @@ router.get('/user/edit/:id', common.restrict, (req, res) => {
         }
 
         res.render('user_edit', {
-            title: 'User edit',
+            title: 'User edit | Lost Lands Support',
             user: user,
             session: req.session,
             message: common.clear_session_value(req.session, 'message'),
@@ -772,7 +772,7 @@ router.get('/users/new', common.restrict, (req, res) => {
     }
 
     res.render('user_new', {
-        title: 'User - New',
+        title: 'User - New | Lost Lands Support',
         session: req.session,
         message: common.clear_session_value(req.session, 'message'),
         message_type: common.clear_session_value(req.session, 'message_type'),
@@ -786,7 +786,7 @@ router.get('/articles', common.restrict, (req, res) => {
     const db = req.app.db;
     common.dbQuery(db.kb, { kb_versioned_doc: { $ne: true } }, { kb_published_date: -1 }, 10, (err, articles) => {
         res.render('articles', {
-            title: 'Articles',
+            title: 'Articles | Lost Lands Support',
             articles: articles,
             session: req.session,
             message: common.clear_session_value(req.session, 'message'),
@@ -801,7 +801,7 @@ router.get('/articles/all', common.restrict, (req, res) => {
     const db = req.app.db;
     common.dbQuery(db.kb, { kb_versioned_doc: { $ne: true } }, { kb_published_date: -1 }, null, (err, articles) => {
         res.render('articles', {
-            title: 'Articles',
+            title: 'Articles | Lost Lands Support',
             articles: articles,
             session: req.session,
             message: common.clear_session_value(req.session, 'message'),
@@ -825,7 +825,7 @@ router.get('/articles/:tag', (req, res) => {
     // we search on the lunr indexes
     common.dbQuery(db.kb, { _id: { $in: lunr_id_array } }, { kb_published_date: -1 }, null, (err, results) => {
         res.render('articles', {
-            title: 'Articles',
+            title: 'Articles | Lost Lands Support',
             results: results,
             session: req.session,
             message: common.clear_session_value(req.session, 'message'),
@@ -985,7 +985,7 @@ router.get('/login', (req, res) => {
             }
 
             res.render('login', {
-                title: 'Login',
+                title: 'Login | Lost Lands Support',
                 referring_url: referringUrl,
                 config: config,
                 message: common.clear_session_value(req.session, 'message'),
@@ -1010,7 +1010,7 @@ router.get('/setup', (req, res) => {
         req.session.needs_setup = false;
         if(user_count === 0){
             res.render('setup', {
-                title: 'Setup',
+                title: 'Setup | Lost Lands Support',
                 config: config,
                 message: common.clear_session_value(req.session, 'message'),
                 message_type: common.clear_session_value(req.session, 'message_type'),
@@ -1284,7 +1284,7 @@ router.get('/files', common.restrict, (req, res) => {
 
         // render the files route
         res.render('files', {
-            title: 'Files',
+            title: 'Files | Lost Lands Support',
             files: file_list,
             dirs: dir_list,
             session: req.session,
@@ -1299,7 +1299,7 @@ router.get('/files', common.restrict, (req, res) => {
 // insert form
 router.get('/insert', common.restrict, (req, res) => {
     res.render('insert', {
-        title: 'Insert new',
+        title: 'Insert new | Lost Lands Support',
         session: req.session,
         kb_title: common.clear_session_value(req.session, 'kb_title'),
         kb_body: common.clear_session_value(req.session, 'kb_body'),
@@ -1354,7 +1354,7 @@ router.get(['/search/:tag', '/topic/:tag'], common.restrict, (req, res) => {
     common.dbQuery(db.kb, { _id: { $in: lunr_id_array }, kb_published: 'true', kb_versioned_doc: { $ne: true } }, null, null, (err, results) => {
         common.dbQuery(db.kb, { kb_published: 'true', kb_featured: 'true' }, sortBy, featuredCount, (err, featured_results) => {
             res.render('index', {
-                title: 'Search results: ' + search_term,
+                title: 'Search results: ' + search_term + ' | Lost Lands Support',
                 search_results: results,
                 user_page: true,
                 session: req.session,
@@ -1401,7 +1401,7 @@ router.post('/search', common.restrict, (req, res) => {
     common.dbQuery(db.kb, { _id: { $in: lunr_id_array }, kb_published: 'true', kb_versioned_doc: { $ne: true } }, null, null, (err, results) => {
         common.dbQuery(db.kb, { kb_published: 'true', kb_featured: 'true' }, sortBy, featuredCount, (err, featured_results) => {
             res.render('index', {
-                title: 'Search results: ' + search_term,
+                title: 'Search results: ' + search_term + ' | Lost Lands Support',
                 search_results: results,
                 user_page: true,
                 session: req.session,
@@ -1420,7 +1420,7 @@ router.post('/search', common.restrict, (req, res) => {
 // import form
 router.get('/import', common.restrict, (req, res) => {
     res.render('import', {
-        title: 'Import',
+        title: 'Import | Lost Lands Support',
         session: req.session,
         helpers: req.handlebars,
         message: common.clear_session_value(req.session, 'message'),

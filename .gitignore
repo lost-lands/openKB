@@ -12,3 +12,4 @@ jsconfig.json
 .idea/
 .DS_Store
 ecosystem.config.js
+config/
